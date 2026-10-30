@@ -5,6 +5,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    database_url: str | None = None
+    db_host: str = "localhost"
+    db_port: int = 5432
+    db_name: str = "medilink"
+    db_user: str = "postgres"
+    db_password: str = ""
+    db_pool_size: int = 5
+    db_max_overflow: int = 10
+    redis_url: str = "redis://localhost:6379/0"
+    celery_broker_url: str = "redis://localhost:6379/1"
+    request_limit_per_minute: int = 120
     app_name: str = "MediLink API"
     app_env: str = "local"
     debug: bool = False

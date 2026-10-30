@@ -4,6 +4,7 @@ from sqlalchemy import (
     CheckConstraint,
     Column,
     DateTime,
+    FetchedValue,
     ForeignKey,
     Index,
     PrimaryKeyConstraint,
@@ -77,5 +78,6 @@ class User(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )

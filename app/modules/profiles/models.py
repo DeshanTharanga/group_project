@@ -5,6 +5,7 @@ from sqlalchemy import (
     Column,
     Date,
     DateTime,
+    FetchedValue,
     ForeignKey,
     Index,
     PrimaryKeyConstraint,
@@ -42,6 +43,7 @@ class PatientProfile(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )
 
@@ -77,5 +79,6 @@ class ProfessionalProfile(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )

@@ -6,6 +6,7 @@ from sqlalchemy import (
     Column,
     Date,
     DateTime,
+    FetchedValue,
     ForeignKey,
     Index,
     Integer,
@@ -145,6 +146,7 @@ class PrescriptionOCRJob(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )
 
@@ -268,6 +270,7 @@ class PrescriptionTemplate(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )
     archived_at = Column(DateTime(timezone=True), nullable=True)
@@ -368,6 +371,7 @@ class Prescription(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )
     version = Column(Integer, server_default=text("1"), nullable=False)

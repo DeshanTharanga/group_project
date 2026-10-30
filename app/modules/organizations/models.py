@@ -3,6 +3,7 @@
 from sqlalchemy import (
     Column,
     DateTime,
+    FetchedValue,
     ForeignKey,
     Index,
     PrimaryKeyConstraint,
@@ -66,5 +67,6 @@ class Organization(Base):
         DateTime(timezone=True),
         server_default=text("now()"),
         onupdate=text("now()"),
+        server_onupdate=FetchedValue(),
         nullable=False,
     )

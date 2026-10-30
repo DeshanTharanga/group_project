@@ -1,23 +1,7 @@
-"""Explicitly create missing tables from registered SQLAlchemy models.
+"""Compatibility entry point: run versioned migrations instead of create_all."""
 
-This is an initial/local setup helper, not a schema migration system.
-"""
-
-import asyncio
-
-import app.main as _main_app  # noqa: F401 - imports all feature ORM models
-from app.database.base import Base
-from app.database.session import init_db
-
-
-async def create_tables() -> None:
-    if not Base.metadata.tables:
-        raise RuntimeError(
-            "No ORM tables are registered yet. Implement and import model modules first."
-        )
-
-    await init_db()
-
+from alembic import command
+from alembic.config import Config
 
 if __name__ == "__main__":
-    asyncio.run(create_tables())
+    command.upgrade(Config("alembic.ini"), "head")

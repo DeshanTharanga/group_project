@@ -113,7 +113,8 @@ async def test_prescription_scope_and_response_projections(api):
             "POST",
             f"/api/v1/access-grants/{grant['grant']['id']}/revoke",
             json={"reason": "Synthetic revoke"},
-        )
+        ),
+        201,
     )
     assert (
         await api.call("GET", f"/api/v1/prescriptions/{p['prescription']['id']}", role="doctor")
@@ -236,6 +237,7 @@ async def test_worker_deduplication_and_latest_response_adherence(api):
             "POST",
             f"/api/v1/dose-occurrences/{due['id']}/responses",
             json={"response": "taken", "reported_taken_at": timestamp.isoformat()},
+            headers={"Idempotency-Key": "synthetic-dose-response"},
         ),
         201,
     )
@@ -244,6 +246,7 @@ async def test_worker_deduplication_and_latest_response_adherence(api):
             "POST",
             f"/api/v1/medication-logs/{log['id']}/corrections",
             json={"response": "skipped", "correction_reason": "Synthetic correction"},
+            headers={"Idempotency-Key": "synthetic-dose-correction"},
         ),
         201,
     )

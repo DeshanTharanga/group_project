@@ -17,7 +17,7 @@ jobs:
       redis:
         image: redis:7-alpine
         ports: ['6379:6379']
-        options: --health-cmd 'redis-cli ping' --health-interval 5s --health-retries 10
+        options: --health-cmd "redis-cli ping" --health-interval 5s --health-retries 10
     env:
       DATABASE_URL: postgresql+asyncpg://postgres:test@localhost:5432/medilink_test
       TEST_DATABASE_URL: postgresql+asyncpg://postgres:test@localhost:5432/medilink_test
